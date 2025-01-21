@@ -1,30 +1,291 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex布局</title>
+    <style>
+      :root {
+        --primary-color: #409eff;
+        --success-color: #67c23a;
+        --warning-color: #e6a23c;
+        --danger-color: #f56c6c;
+        --info-color: #909399;
+        --text-primary: #303133;
+        --text-regular: #606266;
+        --text-secondary: #909399;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: #eee;
+      }
+      .flex {
+        display: flex;
+      }
+      /* *{
+      border: 1px solid black;
+    } */
+      .yinying {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      .baiSe {
+        background-color: white;
+      }
+      .flex1 {
+        flex: 1;
+      }
+      .column {
+        flex-direction: column;
+      }
+      .mg8 {
+        margin: 8px;
+      }
+      .mgr8 {
+        margin-right: 8px;
+      }
+      .mgt {
+        margin-top: 8px;
+      }
+      .daohang {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgb(181, 178, 178);
+        font-size: 14px;
+        color: var(--text-regular);
+        transition: all 0.3s;
+      }
+      .daohang:hover {
+        background-color: #f5f7fa;
+        color: var(--primary-color);
+      }
+      .daohang a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .shuJu {
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
+      .shuJu:hover {
+        transform: translateY(-3px);
+      }
 
-<body>
-  <div style="
-    background-color:#f1f1f1;
-    text-align: center;
-    padding: 40px;
+      .shuJu-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: 10px 0;
+      }
 
-    ">
-    <img src="https://kangwenchang.com/logo.png" alt="logo" style="width: 100px; height: 100px;">
-  </div>
-  <div></div>
-  <div style="
-  background-color: #f1f1f1;
-  text-align: center;
-  padding: 40px;
-  font-size: 12px;
-  ">
-  <p>我的网站</p>
-  <a href="https://kangwenchang.com">友情链接</a>
-  </div>
-</body>
+      .shuJu-title {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
 
+      .app-item {
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .app-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+      }
+
+      .app-content {
+        color: var(--text-regular);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .message-item {
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s;
+        white-space: nowrap; /*合并空白符，但阻止源码中的文本换行*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .message-item:hover {
+        background-color: #f5f7fa;
+      }
+
+      .input-area {
+        padding: 15px;
+      }
+
+      .input-area textarea {
+        width: 90%;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        padding: 10px;
+        resize: none;
+      }
+
+      @media (max-width: 500px) {
+        .ceBian {
+          display: none;
+        }
+        .neiRong {
+          flex-direction: column;
+        }
+        .shuJuQu {
+          flex-direction: column;
+        }
+        .youQu {
+          margin-right: 8px;
+          min-width: 200px; /* 设置最小宽度 */
+        }
+        .shuJu {
+          margin: 0 0 8px;
+          flex: auto;
+        }
+      }
+    </style>
+  </head>
+  <body class="flex">
+    <!-- 侧边栏 -->
+    <div style="width: 200px; z-index: 2" class="ceBian baiSe yinying">
+      <!--头像-->
+      <div
+        class="flex"
+        style="
+          padding: 10px;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 1px solid;
+        "
+      >
+        <img src="./logo.jpg" alt="logo" style="height: 40px; width: 40px" />
+        <div style="margin-left: 10px">Dy管理系统</div>
+      </div>
+      <!--导航-->
+      <div class="flex1">
+        <div class="daohang">📊 数据概览</div>
+        <div class="daohang">👥 用户管理</div>
+        <div class="daohang">⚙️ 系统设置</div>
+        <div class="daohang">
+          <a href="https://dyinglight.me">🔗 官方网站</a>
+        </div>
+      </div>
+    </div>
+    <!-- 主区域 -->
+    <div class="flex1 column flex">
+      <!--  头部栏 -->
+      <div style="height: 60px; z-index: 1" class="baiSe yinying flex">
+        <div style="padding: 20px; font-size: 14px; font-weight: bold">
+          系统概览
+        </div>
+        <div
+          style="
+            padding: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: auto;
+          "
+        >
+          <a href="/" style="text-decoration: none; color: var(--danger-color)"
+            >退出</a
+          >
+        </div>
+      </div>
+      <!--  内容区 -->
+      <div style="overflow: auto" class="flex1 flex neiRong">
+        <!-- 左区-->
+        <div style="flex: 3" class="flex column mg8 yinying">
+          <!--数据区-->
+          <div class="flex shuJuQu">
+            <!--数据块-->
+            <div
+              style="flex: 1; height: 100px"
+              class="shuJu baiSe flex1 mgr8 yinying"
+            >
+              <div class="shuJu-title">CPU占用率</div>
+              <div class="shuJu-value">68%</div>
+              <div class="shuJu-chart">📈</div>
+            </div>
+            <div
+              style="flex: 1; height: 100px"
+              class="shuJu baiSe flex1 mgr8 yinying"
+            >
+              <div class="shuJu-title">内存使用率</div>
+              <div class="shuJu-value">45%</div>
+              <div class="shuJu-chart">📊</div>
+            </div>
+            <div
+              style="flex: 1; height: 100px"
+              class="shuJu baiSe flex1 mgr8 yinying"
+            >
+              <div class="shuJu-title">在线终端数</div>
+              <div class="shuJu-value">128</div>
+              <div class="shuJu-chart">📱</div>
+            </div>
+            <div
+              style="flex: 1; height: 100px"
+              class="shuJu baiSe flex1 mgr8 yinying"
+            >
+              <div class="shuJu-title">网络带宽</div>
+              <div class="shuJu-value">86MB/s</div>
+              <div class="shuJu-chart">🌐</div>
+            </div>
+          </div>
+          <!--列表区-->
+          <div class="flex column">
+            <!--列表项-->
+            <div style="height: 160px" class="baiSe mgt yinying app-item">
+              <div class="app-title">系统状态</div>
+              <div class="app-content">
+                系统运行正常，所有服务组件状态良好。最近一次更新时间：2024-01-20
+                08:30:00
+              </div>
+            </div>
+            <div class="baiSe mgt yinying app-item">
+              <div class="app-title">活跃用户</div>
+              <div class="app-content">
+                当前在线用户：1,234 人<br />
+                日活跃用户：5,678 人<br />
+                周活跃用户：25,890 人
+              </div>
+            </div>
+            <div class="baiSe mgt yinying app-item">
+              <div class="app-title">系统日志</div>
+              <div class="app-content">
+                最近系统操作记录和重要事件将在这里显示
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 右区-->
+        <div style="flex: 1" class="youQu flex column mgr8 mgt">
+          <!--提示区-->
+          <div
+            style="height: 150px; border-radius: 8px"
+            class="baiSe yinying flex column"
+          >
+            <div class="flex1" style="text-align: center; padding: 15px">
+              您好，管理员
+            </div>
+            <div class="input-area">
+              <textarea placeholder="请输入消息" rows="3"></textarea>
+            </div>
+          </div>
+          <!--消息区-->
+          <div class="baiSe mgt yinying flex column" style="border-radius: 8px">
+            <div class="message-item">系统通知：今日系统更新完成</div>
+            <div class="message-item">安全提醒：发现3个潜在风险</div>
+            <div class="message-item">运维消息：备份任务已完成</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
